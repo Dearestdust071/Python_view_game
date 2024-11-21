@@ -11,8 +11,6 @@ root = ctk.CTk()
 ctk.set_default_color_theme("../assets/custom_theme.json")
 
 
-
-
 SerialService.sendDifficulty(1)
 getScore = SerialService.getScore()
 
