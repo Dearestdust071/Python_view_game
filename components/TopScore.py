@@ -4,7 +4,6 @@ import ServicioDB
 # Crear la ventana principal
 root = ctk.CTk()
 root.title("High Scores")
-ctk.set_default_color_theme("../assets/custom_theme.json")
 root.attributes("-fullscreen", True)
 
 # Ejemplo de datos de prueba
@@ -14,8 +13,8 @@ print(topScores)
 # Definir colores
 colors = ["#FF4500", "#FFA500", "#7FFF00"]  # Rojo, Naranja, Verde
 
-# Contenedor superior (Dificil)
-container_top = ctk.CTkFrame(root, fg_color=colors[0], height=200)  # Rojo
+# Contenedor superior (Difícil) ocupa la mitad de la pantalla
+container_top = ctk.CTkFrame(root, fg_color=colors[0], height=root.winfo_screenheight() // 2)  # Rojo
 container_top.pack(side="top", fill="x", padx=20, pady=10)
 container_top.pack_propagate(False)
 
@@ -53,14 +52,13 @@ title_bottom_right = ctk.CTkLabel(
 )
 title_bottom_right.pack(pady=20)
 
-# Mostrar puntajes de prueba en cada contenedor
-# Filtrando por dificultad (esto dependerá de cómo esté organizada tu base de datos)
-for index, (name, score, difficulty) in enumerate(topScores):
-    if difficulty == "Dificil":
+# Mostrar puntajes según dificultad
+for index, (score, name, difficulty) in enumerate(topScores):
+    if difficulty == "2":  # Difícil
         parent = container_top
-    elif difficulty == "Medio":
+    elif difficulty == "1":  # Medio
         parent = container_bottom_left
-    elif difficulty == "Fácil":
+    elif difficulty == "0":  # Fácil
         parent = container_bottom_right
     else:
         continue  # Ignorar si no coincide con ninguna dificultad
@@ -71,6 +69,6 @@ for index, (name, score, difficulty) in enumerate(topScores):
         font=("Arial", 18),
         text_color="#FFFFFF"
     )
-    score_label.pack(anchor="w", pady=5, padx=10)
-
+    score_label.pack(anchor="center", pady=10)  # Centrado y con espaciado vertical
+ 
 root.mainloop()

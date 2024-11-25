@@ -1,7 +1,7 @@
 import customtkinter as ctk
 import SerialService
 # Configuración de la ventana principal
-root = ctk.CTk()
+# root = ctk.CTk()
 root.title("Selecciona una Dificultad")
 ctk.set_default_color_theme("../assets/custom_theme.json")
 root.attributes("-fullscreen", True)

@@ -1,22 +1,20 @@
 import sqlite3
 
+# # # Función para crear la tabla si no existe
+# def create_table():
+#     with sqlite3.connect("../arcade_scores.db") as cx:
+#         cu = cx.cursor()
+#         cu.execute("""
+#             CREATE TABLE IF NOT EXISTS SCORES (
+#                 score VARCHAR(4),
+#                 name VARCHAR(4),
+#                 difficulty VARCHAR(1)
+#             );
+#         """)
+#         cx.commit()
 
 
-# # Función para crear la tabla si no existe
-def create_table():
-    with sqlite3.connect("../db/arcade_scores.db") as cx:
-        cu = cx.cursor()
-        cu.execute("""
-            CREATE TABLE IF NOT EXISTS SCORES (
-                score VARCHAR(4),
-                name VARCHAR(4),
-                difficulty VARCHAR(1)
-            );
-        """)
-        cx.commit()
-
-
-
+    
 # Función para insertar un puntaje
 def insert_score(score, name, difficulty):
     try:

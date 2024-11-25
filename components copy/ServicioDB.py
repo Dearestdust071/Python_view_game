@@ -48,5 +48,5 @@ def get_scores(limit=10):
         return []
     
 
-# create_table()
-# insert_score("100", "Jorge", "0")
+create_table()
+insert_score("100", "Jorge", "0")
