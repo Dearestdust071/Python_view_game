@@ -12,7 +12,7 @@ unsigned long tiempoLimite;
 int ultimoLed = -1; // Variable para almacenar el último LED encendido
 int numLeds=0;
 const int TIEMPO=30; //SEGUNDOS
-char msgboton;
+String  msgboton;
 bool mostrarlogs = true;
 
 void setup() {
@@ -37,10 +37,12 @@ void loop() {
 
 void seleccionarModo() {
   bool ModoRecibido = false;
-  Serial.println("Selecciona el modo de juego:");
-  Serial.println("0: Fácil");
-  Serial.println("1: Medio");
-  Serial.println("2: Difícil");
+  if(mostrarlogs){
+    Serial.println("Selecciona el modo de juego:");
+    Serial.println("0: Fácil");
+    Serial.println("1: Medio");
+    Serial.println("2: Difícil");
+  }  
   while (Serial.available() == 0) {} // Espera a que el usuario ingrese un valor
   modoJuego = Serial.parseInt();
   switch (modoJuego) {
@@ -111,7 +113,7 @@ void jugar() {
     msgboton = "Fallaste. No se presionó a tiempo.";
   }
   if(mostrarlogs){
-    Serial.print(msgboton);
+    Serial.println(msgboton);
     Serial.print("Puntuación actual: ");
     Serial.println(puntuacion);
   }
