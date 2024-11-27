@@ -87,20 +87,20 @@ class Dificultad(ctk.CTkFrame):
             self.controller.dificultad = 0
             print("AH")
             self.highlight_difficulty(self.frames[0])
-            SerialService.sendDifficulty(self.selected_difficulty)  # Enviar dificultad
+       
             
             self.controller.show_frame("Contador")  # Cambiar de vista a ScoreInput
         elif event.keysym == '2':
             print("AH2")
             self.selected_difficulty = 1
             self.controller.dificultad = 1
-            SerialService.sendDifficulty(self.selected_difficulty)  # Enviar dificultad
+
             self.highlight_difficulty(self.frames[1])
             self.controller.show_frame("Contador")  # Cambiar de vista a ScoreInput
         elif event.keysym == '3':
             print("AH3")
             self.selected_difficulty = 2
             self.controller.dificultad = 2
-            SerialService.sendDifficulty(self.selected_difficulty)  # Enviar dificultad
+       
             self.highlight_difficulty(self.frames[2])
             self.controller.show_frame("Contador")  # Cambiar de vista a ScoreInput

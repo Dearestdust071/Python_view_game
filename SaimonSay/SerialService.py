@@ -31,13 +31,8 @@ def getScore():
         if ser.in_waiting > 0:  # Verifica si hay datos en el buffer de entrada
             msgrd = ser.readline().decode('utf-8').strip()  # Lee y decodifica la línea
             print(f'Score final: {msgrd}')
-            if len(msgrd) != 4 or not msgrd.isdigit():
-                raise ValueError("La entrada debe ser una cadena de exactamente 4 dígitos.")
-            dificultad = int(msgrd[0])       # Primer dígito
-            score = int(msgrd[1:])
-            return dificultad , score
-
-
+            return int(msgrd)
+        
 # sendDifficulty(0)
 # getScore()
 

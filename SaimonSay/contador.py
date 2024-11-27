@@ -1,5 +1,6 @@
 import customtkinter as ctk
 import time
+import SerialService
 
 class Contador(ctk.CTkFrame):
     def __init__(self, parent, controller):
@@ -7,7 +8,7 @@ class Contador(ctk.CTkFrame):
         self.controller = controller
         self.flagTimeOver = False
         
-        self.time_left = 5  # Tiempo en segundos para el contador
+        self.time_left = 6  # Tiempo en segundos para el contador
 
         container = ctk.CTkFrame(self, fg_color="#333333")
         container.pack(fill="both", expand=True, padx=70, pady=70)
@@ -45,15 +46,19 @@ class Contador(ctk.CTkFrame):
         # Reducir el tiempo restante y actualizar la etiqueta
         if self.time_left > 0:
             self.time_left -= 1
-            self.timer_label.configure(text=f"Tiempo restante:")
-            self.timer_number.configure(text=f"{self.time_left}")
+            self.timer_label.configure(text=f"Preparate:")
+            if self.time_left !=0 :
+                self.timer_number.configure(text=f"{self.time_left}")
+            else:
+                self.timer_number.configure(text="COMIENZA AHORA!", text_color="#FF0000" )
             # Actualizar el contador cada 1000 ms (1 segundo)
             self.after(1000, self.update_timer)
         else:
             # Cuando el tiempo se acaba, muestra el mensaje de inicio
-            self.timer_number.configure(text="COMIENZA AHORA!", text_color="#FF0000" )
+           
+            SerialService.sendDifficulty(self.controller.dificultad)
             # Si es necesario, descomenta esta línea para cambiar de pantalla:
             self.flagTimeOver = True
-            
-            self.after(1000, self.controller.show_frame("ScoreInput"))
+            time.sleep(1)
+            self.controller.show_frame("ScoreInput")
             # self.controller.show_frame("ScoreInput")
