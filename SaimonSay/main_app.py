@@ -4,6 +4,7 @@ from ScoreInput import ScoreInput
 from Dificultad import Dificultad
 
 class MainApp(ctk.CTk):
+    dificultad = 4
     def __init__(self):
         super().__init__()
         self.title("PUNCH PUNCH MACHINE")
@@ -25,7 +26,7 @@ class MainApp(ctk.CTk):
         self.grid_columnconfigure(0, weight=1)
 
         # Mostrar la vista inicial
-        self.show_frame("Dificultad")
+        self.show_frame("ScoreInput")
     
     def show_frame(self, frame_name):
         """Función para mostrar una vista específica."""
