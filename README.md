@@ -92,7 +92,14 @@ Configurado para establecer comunicación con un Arduino a través del puerto se
 Este proyecto está bajo la licencia MIT. Puedes usar, modificar y distribuir el código con libertad.
 
 🙌 Créditos
-Creado por Jorge Alejandro Exidoro López. Inspirado en el mundo de los juegos de ritmo y diseñado pensando en futuras integraciones con Arduino.
+Creado por
+- Jorge Alejandro Exidoro López.
+- Pedro Leonardo Gonzales Ramirez.
+- Abril ...
+- Ivan Tovar ...
+
+
+Inspirados en el mundo de los juegos de ritmo y diseñado pensando en futuras integraciones con Arduino.
 
 ¡Gracias por tu interés! Si tienes ideas o comentarios, no dudes en contribuir o abrir un issue.
 
