@@ -36,7 +36,8 @@ class Dificultad(ctk.CTkFrame):
         inner_container = ctk.CTkFrame(container, fg_color="#444444")
         inner_container.pack(pady=40, padx=40, fill="x")
         inner_container.pack_propagate(False)
-        inner_container.grid_columnconfigure((0, 1, 2), weight=1)
+        inner_container.grid_columnconfigure(0, weight=1)
+        inner_container.grid_rowconfigure(0, weight=1) 
 
         # Configuración de dificultades
         self.frames = []
@@ -48,24 +49,29 @@ class Dificultad(ctk.CTkFrame):
         ]
         colors = [ "#57ad00", "#ad7100", "#c21700"]
 
-        # Crear tarjetas de dificultad
-        for i in range(3):
-            frame = ctk.CTkFrame(inner_container, width=600, height=600, corner_radius=15, fg_color=colors[i])
-            frame.grid(row=0, column=i, padx=20, pady=20, sticky="nsew")
+        for i in range(len(colors)):  # Configurar el peso de las filas dinámicamente
+            inner_container.grid_rowconfigure(i, weight=1)
+            inner_container.grid_columnconfigure(0, weight=1)
 
-            label = ctk.CTkLabel(frame, text=difficulties[i], font=("Press Start 2P", 32, "bold"), text_color="#FFFFFF")
-            label.pack(expand=True, fill="both", pady=(15, 0))
+        for i in range(len(colors)):
+            frame = ctk.CTkFrame(inner_container, corner_radius=15, fg_color=colors[i])
+            frame.grid(row=i, column=0, padx=20, pady=40, sticky="nsew")
 
-            description_label = ctk.CTkLabel(frame, text=descriptions[i], font=("Courier", 14), text_color="#F0F0F0")
-            description_label.pack(expand=True, fill="both", padx=10)
+            frame.grid_rowconfigure(0, weight=1)
+            frame.grid_rowconfigure(1, weight=1)
+            frame.grid_rowconfigure(2, weight=1)
+            frame.grid_columnconfigure(0, weight=1)
 
-            key_label = ctk.CTkLabel(frame, text=f"Presiona {i + 1}", font=("Courier", 14, "italic"), text_color="#FFFFFF")
-            key_label.pack(expand=True, fill="both", pady=10)
+            label = ctk.CTkLabel(frame, text=difficulties[i], font=("Press Start 2P", 30, "bold"), text_color="#FFFFFF", wraplength=500)
+            label.grid(row=0, column=0, padx=10, pady=(15, 0), sticky="nsew")
+
+            description_label = ctk.CTkLabel(frame, text=descriptions[i], font=("Courier", 20), text_color="#F0F0F0")
+            description_label.grid(row=1, column=0, padx=10, sticky="nsew")
+
+            key_label = ctk.CTkLabel(frame, text=f"Presiona {i + 1}", font=("Courier", 20, "italic"), text_color="#FFFFFF")
+            key_label.grid(row=2, column=0, padx=10, pady=10, sticky="nsew")
 
             self.frames.append(frame)
-
-        # Vincular teclas a la función de selección en el widget raíz
-    
 
     def highlight_difficulty(self, frame):
         """Resalta la tarjeta seleccionada."""
@@ -78,6 +84,7 @@ class Dificultad(ctk.CTkFrame):
         print()
         if event.keysym == '1':
             self.selected_difficulty = 0
+            self.controller.dificultad = 0
             print("AH")
             self.highlight_difficulty(self.frames[0])
             SerialService.sendDifficulty(self.selected_difficulty)  # Enviar dificultad
@@ -86,12 +93,14 @@ class Dificultad(ctk.CTkFrame):
         elif event.keysym == '2':
             print("AH2")
             self.selected_difficulty = 1
+            self.controller.dificultad = 1
             SerialService.sendDifficulty(self.selected_difficulty)  # Enviar dificultad
             self.highlight_difficulty(self.frames[1])
             self.controller.show_frame("Contador")  # Cambiar de vista a ScoreInput
         elif event.keysym == '3':
             print("AH3")
             self.selected_difficulty = 2
+            self.controller.dificultad = 2
             SerialService.sendDifficulty(self.selected_difficulty)  # Enviar dificultad
             self.highlight_difficulty(self.frames[2])
             self.controller.show_frame("Contador")  # Cambiar de vista a ScoreInput

@@ -9,7 +9,8 @@ class ScoreInput(ctk.CTkFrame):
         
         # Enviar dificultad y obtener el puntaje desde el servicio serial
         # SerialService.sendDifficulty(1)
-        # self.getDificultad, self.getScore = SerialService.getScore()
+        self.getDificultad, self.getScore = SerialService.getScore()
+        self.controller.dificultad = self.getDificultad
 
         self.getScore = 100
         # Funciones/Metodos:
@@ -17,12 +18,12 @@ class ScoreInput(ctk.CTkFrame):
         # Limita la cantidad de caracteres en el entry
         def limit_chars(event):
             current_text = event.widget.get()
-            if len(current_text) > 4:
-                event.widget.delete(4, "end")
+            if len(current_text) > 5:
+                event.widget.delete(5, "end")
 
         # Insertar a la base de datos el score
         def insert(event=None):
-            print("Entro en el isnert")
+            print("Entro en el insert")
             score = self.getScore  # Asumir un puntaje por defecto (se puede modificar)
             
             nombre = entry.get()
@@ -35,29 +36,54 @@ class ScoreInput(ctk.CTkFrame):
         frame.pack(pady=70, padx=70, fill="both", expand=True)
 
         # Creamos columnas y filas para centrar widgets
-        frame.grid_columnconfigure((0,1,2,3,4), weight=1) 
-        frame.grid_rowconfigure((0,1,2), weight=1)  
+        frame.grid_columnconfigure((0, 1, 2, 3, 4), weight=1)
+        frame.grid_rowconfigure((0, 1, 2), weight=1)
 
-        # Título de la pantalla:
-        label = ctk.CTkLabel(frame, text="Registro de nombres")
+        # Título de la pantalla
+        label = ctk.CTkLabel(
+            frame, 
+            font=("Press Start 2P", 52, "bold"), 
+            text="Inserta tu nombre", 
+            anchor="center"  # Centrado
+        )
         label.grid(row=0, column=0, sticky="", columnspan=5)
 
-        # Label para mostrar el puntaje obtenido
-        label = ctk.CTkLabel(frame, text=self.getScore, fg_color="#111111")
-        label.grid(row=1, column=1, sticky='ew', columnspan=1, padx="10")
+        # Label para mostrar el puntaje obtenido (con márgenes internos)
+        score_frame = ctk.CTkFrame(frame, fg_color="#111111")  # Contenedor para márgenes internos
+        score_frame.grid(row=1, column=1, sticky="ew", columnspan=3, padx=10, pady=10)
+
+        label = ctk.CTkLabel(
+            score_frame,
+            font=("Press Start 2P", 82, "bold"),
+            text=self.getScore,
+            fg_color="#111111"
+        )
+        label.pack(expand=True, fill="both", padx=20, pady=20)  # Márgenes internos
 
         # Texto para el input de nombre
-        label = ctk.CTkLabel(frame, text="NOMBRE:", fg_color="#111111")
-        label.grid(row=1, column=2, sticky='ew', columnspan=1, padx="10")
+        label = ctk.CTkLabel(
+            frame, 
+            text="NOMBRE:", 
+            fg_color="#111111", 
+            font=("Press Start 2P", 52, "bold"), 
+            anchor="center"  # Centrado
+        )
+        label.grid(row=2, column=1, sticky='ew', columnspan=1, padx=10)
 
         # Input para el nombre
-        entry = ctk.CTkEntry(frame, placeholder_text="USER")
-        entry.grid(row=1, column=2, sticky='ew', columnspan=2, padx="10")
+        entry = ctk.CTkEntry(
+            frame, 
+            placeholder_text="",
+            font=("Press Start 2P", 24),  # Aumentar el tamaño de la fuente
+            height=50
+        )
+        entry.grid(row=2, column=2, sticky='ew', columnspan=2, padx=10)
         entry.bind("<KeyRelease>", limit_chars)  # Límite de caracteres
         entry.bind("<Return>", insert)  # Insertar el nombre y puntaje
 
         # Establecer el foco en el input al iniciar
         entry.focus()
+
 
         # Vincular teclas para cambiar a otras vistas, si es necesario
         
