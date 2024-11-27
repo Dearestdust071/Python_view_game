@@ -14,12 +14,16 @@ Este es un proyecto en desarrollo, creado con **Python**, que busca ofrecer una 
 ## 🛠️ Requisitos  
 
 - **Python**: 3.7.0  
-- **SQLite3**: 3.43.2  
+- **SQLite3**: 3.43.2
+- **pyserial**: 3.5.0  
+- **customtkinter**: 5.2.2
 
 Para instalar las dependencias (si hay librerías adicionales):  
 
 ```bash
-pip install -r requirements.txt
+pip install -r SaimonSay/requirements.txt
+
+
 📂 Estructura del Proyecto
 plaintext
 Copiar código
@@ -29,7 +33,11 @@ RhythmGameInterface/
 ├── main.py                 # Archivo principal para ejecutar la aplicación.
 ├── arcade_scores.db        # Base de datos SQLite para almacenar puntajes.
 ├── assets/                 # Recursos visuales (íconos, imágenes, etc.).
+└── Requirements.txt        # Para instalar los requisitos
 └── README.md               # Este archivo.
+
+
+
 🚀 Cómo Usar
 Clona el repositorio:
 
@@ -41,10 +49,13 @@ Navega al directorio:
 bash
 Copiar código
 cd RhythmGameInterface
+
+
 Ejecuta la aplicación:
 
 bash
 Copiar código
+pip install -r requirements.txt
 python main.py
 Explora las funcionalidades disponibles:
 
@@ -81,7 +92,14 @@ Configurado para establecer comunicación con un Arduino a través del puerto se
 Este proyecto está bajo la licencia MIT. Puedes usar, modificar y distribuir el código con libertad.
 
 🙌 Créditos
-Creado por Jorge Alejandro Exidoro López. Inspirado en el mundo de los juegos de ritmo y diseñado pensando en futuras integraciones con Arduino.
+Creado por
+- Jorge Alejandro Exidoro López.
+- Pedro Leonardo Gonzales Ramirez.
+- Abril ...
+- Ivan Tovar ...
+
+
+Inspirados en el mundo de los juegos de ritmo y diseñado pensando en futuras integraciones con Arduino.
 
 ¡Gracias por tu interés! Si tienes ideas o comentarios, no dudes en contribuir o abrir un issue.
 
