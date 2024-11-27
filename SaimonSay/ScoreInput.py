@@ -6,13 +6,14 @@ class ScoreInput(ctk.CTkFrame):
     def __init__(self, parent, controller):
         super().__init__(parent)
         self.controller = controller  # Guarda la referencia al controlador
-
+        
         # Enviar dificultad y obtener el puntaje desde el servicio serial
-        SerialService.sendDifficulty(1)
-        self.getScore = SerialService.getScore()
+        # SerialService.sendDifficulty(1)
+        self.getDificultad, self.getScore = SerialService.getScore()
+
 
         # Funciones/Metodos:
-
+        
         # Limita la cantidad de caracteres en el entry
         def limit_chars(event):
             current_text = event.widget.get()
@@ -22,9 +23,9 @@ class ScoreInput(ctk.CTkFrame):
         # Insertar a la base de datos el score
         def insert(event=None):
             print("Entro en el isnert")
-            score = "100"  # Asumir un puntaje por defecto (se puede modificar)
+            score = self.getScore  # Asumir un puntaje por defecto (se puede modificar)
             nombre = entry.get()
-            dificultad = "0"
+            dificultad = self.getDificultad
             ServicioDB.insert_score(score, nombre, dificultad )
             self.controller.show_frame("TopScore")  # Cambiar de vista a ScoreInput
 

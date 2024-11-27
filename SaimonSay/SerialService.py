@@ -1,24 +1,41 @@
 import serial
 import time
+import serial.tools.list_ports
 
+ports = serial.tools.list_ports.comports()
+portMaestro = '/dev/cu.usbmodem14012'
+for port in ports:
+    print(port.description)
+    if "IOUSBHostDevice" or "Arduino Uno" in port.description:
+        portMaestro = port.device
 ser = serial.Serial()
 ser.baudrate = 9600
-ser.port = '/dev/cu.usbmodem1401'
+ser.port = portMaestro
 ser.timeout  =  None
 ser.open()
 
 time.sleep(2)
 
 def sendDifficulty(difficulty):
+    print(difficulty)
     """Envia la dificultad, esta funcion solo puede ser un unico digito"""
-    ser.write(bytes([difficulty]))
+    #ser.write(bytes([difficulty]))
+    ser.write(f"{difficulty}\n".encode('utf-8'))
+
     
 
 def getScore():
-    print("Entro")
-    msgrd = ser.readline().decode('utf-8').strip()
-    print(f'Score final: {msgrd}')
-    return msgrd
+    """Recibe informacion del arduino"""
+    print("Entro a getScore")
+    while True:
+        if ser.in_waiting > 0:  # Verifica si hay datos en el buffer de entrada
+            msgrd = ser.readline().decode('utf-8').strip()  # Lee y decodifica la línea
+            print(f'Score final: {msgrd}')
+            if len(msgrd) != 4 or not msgrd.isdigit():
+                raise ValueError("La entrada debe ser una cadena de exactamente 4 dígitos.")
+            dificultad = int(msgrd[0])       # Primer dígito
+            score = int(msgrd[1:])
+            return dificultad , score
 
 
 # sendDifficulty(0)
