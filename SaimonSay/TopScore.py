@@ -1,9 +1,17 @@
 import customtkinter as ctk
 import ServicioDB
+from PIL import ImageFont, ImageTk
+from PIL import Image, ImageDraw
+from tkinter.font import Font
+import os
 
+# Ruta de tu archivo TTF
+ruta_fuente = os.path.join(os.getcwd(), "PressStart2P-Regular.ttf")
 class TopScore(ctk.CTkFrame):
     def __init__(self, parent, controller):
         super().__init__(parent)
+        ServicioDB.create_table()  # Asegura que la tabla existe
+        ServicioDB.check_table_exists()  # Verifica la existencia de la tabla
         self.controller = controller  # Guarda la referencia al controlador
 
         # Ejemplo de datos de prueba
@@ -12,7 +20,7 @@ class TopScore(ctk.CTkFrame):
         print(topScores)
 
         # Definir colores
-        colors = ["#FF4500", "#FFA500", "#7FFF00"]  # Rojo, Naranja, Verde
+        colors = ["#c21700", "#ad7100", "#57ad00"]  # Rojo, Naranja, Verde
 
         # Contenedor superior (Difícil)
         container_top = ctk.CTkFrame(self, fg_color=colors[0], height=450)  # Rojo
@@ -22,7 +30,7 @@ class TopScore(ctk.CTkFrame):
         title_top = ctk.CTkLabel(
             container_top,
             text="Difícil",
-            font=("Courier", 28, "bold"),
+            font=("Press Start 2P", 32, "bold"),
             text_color="#FFFFFF"
         )
         title_top.pack(pady=20, anchor="center")
@@ -35,7 +43,7 @@ class TopScore(ctk.CTkFrame):
         title_bottom_left = ctk.CTkLabel(
             container_bottom_left,
             text="Medio",
-            font=("Courier", 28, "bold"),
+            font=("Press Start 2P", 32, "bold"),
             text_color="#FFFFFF"
         )
         title_bottom_left.pack(pady=20, anchor="center")
@@ -48,27 +56,27 @@ class TopScore(ctk.CTkFrame):
         title_bottom_right = ctk.CTkLabel(
             container_bottom_right,
             text="Fácil",
-            font=("Courier", 28, "bold"),
+            font=("Press Start 2P", 32, "bold"),
             text_color="#FFFFFF"
         )
         title_bottom_right.pack(pady=20, anchor="center")
 
         # Mostrar puntajes de prueba en cada contenedor
-        for index, (name, score, difficulty) in enumerate(topScores):
-            topScores = ServicioDB.get_scores()
-            if difficulty == "0":
-                parent = container_top
-            elif difficulty == "1":
-                parent = container_bottom_left
-            elif difficulty == "2":
+        for index, (score, name, difficulty) in enumerate(topScores):
+            if difficulty == 0:
                 parent = container_bottom_right
+            elif difficulty == 1:
+                parent = container_bottom_left
+            elif difficulty == 2:
+                
+                parent = container_top
             else:
                 continue  # Ignorar si no coincide con ninguna dificultad
 
             score_label = ctk.CTkLabel(
                 parent,
                 text=f"{index + 1}. {name}: {score}",
-                font=("Arial", 18),
+                font=("Courier", 28, "bold"),
                 text_color="#FFFFFF"
             )
             score_label.pack(anchor="center", pady=5, padx=10)

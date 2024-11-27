@@ -27,7 +27,7 @@ class MainApp(ctk.CTk):
         self.grid_columnconfigure(0, weight=1)
 
         # Mostrar la vista inicial
-        self.show_frame("TopScore")
+        self.show_frame("Contador")
     
     def show_frame(self, frame_name):
         """Función para mostrar una vista específica."""

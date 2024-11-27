@@ -18,7 +18,7 @@ class Dificultad(ctk.CTkFrame):
         title_label = ctk.CTkLabel(
             container,
             text="Selecciona tu Nivel de Dificultad",
-            font=("Courier", 28, "bold"),
+            font=("Press Start 2P", 36, "bold"),
             text_color="#FFFFFF"
         )
         title_label.pack(pady=(20, 10))
@@ -27,7 +27,7 @@ class Dificultad(ctk.CTkFrame):
         subtitle_label = ctk.CTkLabel(
             container,
             text="Elige una opción con las teclas 1, 2 o 3",
-            font=("Courier", 16),
+            font=("Courier", 32),
             text_color="#BBBBBB"
         )
         subtitle_label.pack()
@@ -46,14 +46,14 @@ class Dificultad(ctk.CTkFrame):
             "Un reto moderado. ¡Prepárate!",
             "Solo para expertos. ¡Buena suerte!"
         ]
-        colors = ["#7FFF00", "#FFA500", "#FF4500"]
+        colors = [ "#57ad00", "#ad7100", "#c21700"]
 
         # Crear tarjetas de dificultad
         for i in range(3):
-            frame = ctk.CTkFrame(inner_container, width=200, height=200, corner_radius=15, fg_color=colors[i])
-            frame.grid(row=0, column=i, padx=20, pady=10, sticky="nsew")
+            frame = ctk.CTkFrame(inner_container, width=600, height=600, corner_radius=15, fg_color=colors[i])
+            frame.grid(row=0, column=i, padx=20, pady=20, sticky="nsew")
 
-            label = ctk.CTkLabel(frame, text=difficulties[i], font=("Courier", 20, "bold"), text_color="#FFFFFF")
+            label = ctk.CTkLabel(frame, text=difficulties[i], font=("Press Start 2P", 32, "bold"), text_color="#FFFFFF")
             label.pack(expand=True, fill="both", pady=(15, 0))
 
             description_label = ctk.CTkLabel(frame, text=descriptions[i], font=("Courier", 14), text_color="#F0F0F0")
