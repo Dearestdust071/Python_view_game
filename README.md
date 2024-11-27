@@ -21,7 +21,7 @@ Este es un proyecto en desarrollo, creado con **Python**, que busca ofrecer una 
 Para instalar las dependencias (si hay librerías adicionales):  
 
 ```bash
-pip install -r requirements.txt
+pip install -r SaimonSay/requirements.txt
 
 
 📂 Estructura del Proyecto
