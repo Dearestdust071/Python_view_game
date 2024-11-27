@@ -60,4 +60,4 @@ class ScoreInput(ctk.CTkFrame):
 
         # Vincular teclas para cambiar a otras vistas, si es necesario
         
-        # self.bind("<Escape>", lambda event: self.controller.show_frame("Dificultad"))
+        # self.bind("<e>", lambda event: self.controller.show_frame("Dificultad"))

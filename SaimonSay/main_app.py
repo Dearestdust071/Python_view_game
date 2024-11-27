@@ -2,6 +2,7 @@ import customtkinter as ctk
 from TopScore import TopScore
 from ScoreInput import ScoreInput
 from Dificultad import Dificultad
+from contador import Contador
 
 class MainApp(ctk.CTk):
     def __init__(self):
@@ -17,7 +18,8 @@ class MainApp(ctk.CTk):
         self.frame_classes = {
             "TopScore": TopScore,
             "ScoreInput": ScoreInput,
-            "Dificultad": Dificultad
+            "Dificultad": Dificultad,
+            "Contador": Contador
         }
 
         # Configuración de la cuadrícula en el root

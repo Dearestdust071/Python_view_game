@@ -3,7 +3,7 @@ import time
 
 ser = serial.Serial()
 ser.baudrate = 9600
-ser.port = '/dev/cu.usbmodem11301'
+ser.port = '/dev/cu.usbmodem1201'
 ser.timeout  =  None
 ser.open()
 
