@@ -14,12 +14,16 @@ Este es un proyecto en desarrollo, creado con **Python**, que busca ofrecer una 
 ## 🛠️ Requisitos  
 
 - **Python**: 3.7.0  
-- **SQLite3**: 3.43.2  
+- **SQLite3**: 3.43.2
+- **pyserial**: 3.5.0  
+- **customtkinter**: 5.2.2
 
 Para instalar las dependencias (si hay librerías adicionales):  
 
 ```bash
 pip install -r requirements.txt
+
+
 📂 Estructura del Proyecto
 plaintext
 Copiar código
@@ -29,7 +33,11 @@ RhythmGameInterface/
 ├── main.py                 # Archivo principal para ejecutar la aplicación.
 ├── arcade_scores.db        # Base de datos SQLite para almacenar puntajes.
 ├── assets/                 # Recursos visuales (íconos, imágenes, etc.).
+└── Requirements.txt        # Para instalar los requisitos
 └── README.md               # Este archivo.
+
+
+
 🚀 Cómo Usar
 Clona el repositorio:
 
@@ -41,10 +49,13 @@ Navega al directorio:
 bash
 Copiar código
 cd RhythmGameInterface
+
+
 Ejecuta la aplicación:
 
 bash
 Copiar código
+pip install -r requirements.txt
 python main.py
 Explora las funcionalidades disponibles:
 
