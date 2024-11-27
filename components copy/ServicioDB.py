@@ -1,10 +1,10 @@
 import sqlite3
 
-
+RUTADB = '"./arcade_scores.db"'
 
 # # Función para crear la tabla si no existe
 def create_table():
-    with sqlite3.connect("../db/arcade_scores.db") as cx:
+    with sqlite3.connect(RUTADB) as cx:
         cu = cx.cursor()
         cu.execute("""
             CREATE TABLE IF NOT EXISTS SCORES (
@@ -20,7 +20,7 @@ def create_table():
 # Función para insertar un puntaje
 def insert_score(score, name, difficulty):
     try:
-        with sqlite3.connect("../db/arcade_scores.db") as cx:
+        with sqlite3.connect(RUTADB) as cx:
             cu = cx.cursor()
             cu.execute(
                 "INSERT INTO SCORES (score, name, difficulty) VALUES (?, ?, ?)",
@@ -35,7 +35,7 @@ def insert_score(score, name, difficulty):
 # Función para obtener los puntajes
 def get_scores(limit=10):
     try:
-        with sqlite3.connect("../db/arcade_scores.db") as cx:
+        with sqlite3.connect(RUTADB) as cx:
             cu = cx.cursor()
             cu.execute(
                 "SELECT score, name, difficulty FROM SCORES ORDER BY score DESC LIMIT ?",
