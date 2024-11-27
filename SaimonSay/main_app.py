@@ -10,27 +10,38 @@ class MainApp(ctk.CTk):
         self.wm_attributes('-fullscreen', True)
         self.state('normal')
 
-        # Diccionario para almacenar las instancias de las vistas
-        self.frames = {}
+        # Variable para mantener referencia al frame actual
+        self.current_frame = None
+
+        # Diccionario para mapear nombres de vistas a clases
+        self.frame_classes = {
+            "TopScore": TopScore,
+            "ScoreInput": ScoreInput,
+            "Dificultad": Dificultad
+        }
 
         # Configuración de la cuadrícula en el root
         self.grid_rowconfigure(0, weight=1)
         self.grid_columnconfigure(0, weight=1)
-
-        # Inicializar las vistas y añadirlas al diccionario
-        for FrameClass in (Dificultad, ScoreInput, TopScore):
-            frame = FrameClass(self, self)
-            self.frames[FrameClass.__name__] = frame
-            frame.grid(row=0, column=0, sticky="nsew")
 
         # Mostrar la vista inicial
         self.show_frame("TopScore")
     
     def show_frame(self, frame_name):
         """Función para mostrar una vista específica."""
-        frame = self.frames.get(frame_name)
-        if frame:
-            frame.tkraise()
+        # Destruir el frame actual si existe
+        if self.current_frame is not None:
+            self.current_frame.destroy()
+
+        # Crear y mostrar el nuevo frame
+        FrameClass = self.frame_classes.get(frame_name)
+        if FrameClass:
+            self.current_frame = FrameClass(self, self)
+            self.current_frame.grid(row=0, column=0, sticky="nsew")
             print(f"Cambiando a la vista: {frame_name}")  # Solo para depuración
         else:
             print(f"Vista {frame_name} no encontrada.")  # Para depuración
+
+if __name__ == "__main__":
+    app = MainApp()
+    app.mainloop()

@@ -81,7 +81,7 @@ class Dificultad(ctk.CTkFrame):
             print("AH")
             self.highlight_difficulty(self.frames[0])
             SerialService.sendDifficulty(self.selected_difficulty)  # Enviar dificultad
-            SerialService.getScore()  # Obtener puntaje
+            
             self.controller.show_frame("ScoreInput")  # Cambiar de vista a ScoreInput
         elif event.keysym == '2':
             print("AH2")

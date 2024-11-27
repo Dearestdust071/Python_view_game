@@ -55,6 +55,7 @@ class TopScore(ctk.CTkFrame):
 
         # Mostrar puntajes de prueba en cada contenedor
         for index, (name, score, difficulty) in enumerate(topScores):
+            topScores = ServicioDB.get_scores()
             if difficulty == "0":
                 parent = container_top
             elif difficulty == "1":

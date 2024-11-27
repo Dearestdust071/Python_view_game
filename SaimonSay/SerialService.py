@@ -3,7 +3,7 @@ import time
 
 ser = serial.Serial()
 ser.baudrate = 9600
-ser.port = '/dev/cu.usbmodem12201'
+ser.port = '/dev/cu.usbmodem11301'
 ser.timeout  =  None
 ser.open()
 
@@ -15,7 +15,8 @@ def sendDifficulty(difficulty):
     
 
 def getScore():
-    print("Entro")
+    """Recibe informacion del arduino"""
+    print("Entro a getScore")
     msgrd = ser.readline().decode('utf-8').strip()
     print(f'Score final: {msgrd}')
     return msgrd
