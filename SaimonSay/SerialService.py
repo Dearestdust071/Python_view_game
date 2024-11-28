@@ -6,13 +6,18 @@ ports = serial.tools.list_ports.comports()
 portMaestro = '/dev/cu.usbmodem14012'
 for port in ports:
     print(port.description)
-    if "IOUSBHostDevice" or "Arduino Uno" in port.description:
+    if any(keyword in port.description for keyword in ["IOUSBHostDevice", "Arduino Uno", "ttyACM0"]):
         portMaestro = port.device
 ser = serial.Serial()
 ser.baudrate = 9600
 ser.port = portMaestro
 ser.timeout  =  None
-ser.open()
+try:
+    if not ser.is_open:
+        ser.open()
+        print(f"Puerto {portMaestro} abierto con éxito.")
+except serial.SerialException as e:
+    print(f"Error al abrir el puerto {portMaestro}: {e}")
 
 time.sleep(2)
 
