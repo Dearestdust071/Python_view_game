@@ -6,13 +6,11 @@ class ScoreInput(ctk.CTkFrame):
     def __init__(self, parent, controller):
         super().__init__(parent)
         self.controller = controller  # Guarda la referencia al controlador
-        
+        self.getScore = None
         # Enviar dificultad y obtener el puntaje desde el servicio serial
-        # SerialService.sendDifficulty(1)
-        self.getDificultad, self.getScore = SerialService.getScore()
-        self.controller.dificultad = self.getDificultad
-
-        self.getScore = 100
+        self.getScore = SerialService.getScore()
+        print(self.getScore)
+        #self.controller.dificultad = self.getDificultad
         # Funciones/Metodos:
         
         # Limita la cantidad de caracteres en el entry
@@ -24,11 +22,9 @@ class ScoreInput(ctk.CTkFrame):
         # Insertar a la base de datos el score
         def insert(event=None):
             print("Entro en el insert")
-            score = self.getScore  # Asumir un puntaje por defecto (se puede modificar)
-            
             nombre = entry.get()
-            dificultad = self.getDificultad
-            ServicioDB.insert_score(score, nombre, dificultad )
+            # dificultad = self.getDificultad  Cambiamos a un valor predeterminado para probar
+            ServicioDB.insert_score(self.getScore, nombre, self.controller.dificultad )
             self.controller.show_frame("TopScore")  # Cambiar de vista a ScoreInput
 
         # Configuración de la ventana para utilizar todo el espacio
@@ -56,7 +52,7 @@ class ScoreInput(ctk.CTkFrame):
             score_frame,
             font=("Press Start 2P", 82, "bold"),
             text=self.getScore,
-            fg_color="#111111"
+            fg_color="#FFFFFF"
         )
         label.pack(expand=True, fill="both", padx=20, pady=20)  # Márgenes internos
 
@@ -64,7 +60,7 @@ class ScoreInput(ctk.CTkFrame):
         label = ctk.CTkLabel(
             frame, 
             text="NOMBRE:", 
-            fg_color="#111111", 
+            fg_color="#FFFFFF", 
             font=("Press Start 2P", 52, "bold"), 
             anchor="center"  # Centrado
         )

@@ -27,7 +27,7 @@ def create_table():
             cursor.execute("""
                 CREATE TABLE IF NOT EXISTS SCORES (
                     score INTEGER NOT NULL CHECK(score >= 0),
-                    name TEXT NOT NULL CHECK(LENGTH(name) <= 4),
+                    name TEXT NOT NULL CHECK(LENGTH(name) <= 6),
                     difficulty INTEGER NOT NULL CHECK(difficulty BETWEEN 0 AND 9)
                 );
             """)
