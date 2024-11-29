@@ -16,8 +16,8 @@ class ScoreInput(ctk.CTkFrame):
         # Limita la cantidad de caracteres en el entry
         def limit_chars(event):
             current_text = event.widget.get()
-            if len(current_text) > 5:
-                event.widget.delete(5, "end")
+            if len(current_text) > 6:
+                event.widget.delete(6, "end")
 
         # Insertar a la base de datos el score
         def insert(event=None):

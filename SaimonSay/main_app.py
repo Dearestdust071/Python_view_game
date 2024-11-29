@@ -26,7 +26,7 @@ class MainApp(ctk.CTk):
         # Configuración de la cuadrícula en el root
         self.grid_rowconfigure(0, weight=1)
         self.grid_columnconfigure(0, weight=1)
-
+        self.bind("<Escape>", self.close_app)
         # Mostrar la vista inicial
         self.show_frame("TopScore")
     
@@ -41,10 +41,9 @@ class MainApp(ctk.CTk):
         if FrameClass:
             self.current_frame = FrameClass(self, self)
             self.current_frame.grid(row=0, column=0, sticky="nsew")
-            print(f"Cambiando a la vista: {frame_name}")  # Solo para depuración
+            print(f"Cambiando a la vista: {frame_name}") 
         else:
-            print(f"Vista {frame_name} no encontrada.")  # Para depuración
-
-if __name__ == "__main__":
-    app = MainApp()
-    app.mainloop()
+            print(f"Vista {frame_name} no encontrada.")  
+            
+    def close_app(self, event=None):
+        self.destroy()

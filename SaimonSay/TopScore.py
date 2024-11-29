@@ -61,21 +61,30 @@ class TopScore(ctk.CTkFrame):
         )
         title_bottom_right.pack(pady=20, anchor="center")
 
+        cero = 0
+        uno = 0
+        dos = 0
         # Mostrar puntajes de prueba en cada contenedor
         for index, (score, name, difficulty) in enumerate(topScores):
+            valorIndex = 0
             if difficulty == 0:
+                cero += 1
+                valorIndex = cero
                 parent = container_bottom_right
             elif difficulty == 1:
+                uno += 1
+                valorIndex = uno
                 parent = container_bottom_left
             elif difficulty == 2:
-                
+                dos += 1
+                valorIndex = dos
                 parent = container_top
             else:
                 continue  # Ignorar si no coincide con ninguna dificultad
 
             score_label = ctk.CTkLabel(
                 parent,
-                text=f"{index + 1}. {name}: {score}",
+                text=f"{valorIndex}. {name}: {score}",
                 font=("Courier", 28, "bold"),
                 text_color="#FFFFFF"
             )
